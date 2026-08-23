@@ -32,8 +32,10 @@ export function renderCards(hymns, lockedSlots, themeChecked, hymnsCount) {
     const lockBtn = document.createElement('button');
     lockBtn.className = 'lock-btn';
     lockBtn.setAttribute('data-slot', i);
-    lockBtn.textContent = lockedSlots[i] ? '🔒' : '🔓';
+    const isLocked = !!lockedSlots[i];
+    lockBtn.textContent = isLocked ? '🔒' : '🔓';
     lockBtn.setAttribute('type', 'button');
+    lockBtn.setAttribute('aria-label', `${isLocked ? 'Unlock' : 'Lock'} this hymn`);
 
     // Header with label and lock
     const header = document.createElement('div');
@@ -51,11 +53,11 @@ export function renderCards(hymns, lockedSlots, themeChecked, hymnsCount) {
 
     const number = document.createElement('div');
     number.className = 'hymn-number';
-    number.textContent = `#${hymn.number}`;
+    number.textContent = `#${hymn ? hymn.number : '—'}`;
 
     const title = document.createElement('div');
     title.className = 'hymn-title';
-    title.textContent = hymn.title;
+    title.textContent = hymn ? hymn.title : 'No hymn found';
 
     card.appendChild(number);
     card.appendChild(title);
@@ -86,7 +88,7 @@ export function renderCards(hymns, lockedSlots, themeChecked, hymnsCount) {
 export function showThemeWarning(theme) {
   const warningEl = document.getElementById('theme-warning');
   const displayName = THEME_DISPLAY_MAP[theme] || theme;
-  warningEl.textContent = `Not enough ${displayName} hymns available`;
+  warningEl.textContent = `Not enough ${displayName} hymns — some slots used the general pool.`;
   warningEl.classList.remove('hidden');
 }
 
