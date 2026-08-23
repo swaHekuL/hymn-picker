@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Hymn Picker">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <title>Hymn Picker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Hymn Picker</h1>
+  </header>
+
+  <main class="app-main">
+    <section class="settings-panel">
+      <div class="settings-row">
+        <span class="settings-label">Hymns</span>
+        <div class="pill-toggle" id="hymns-toggle" role="group" aria-label="Number of hymns">
+          <button class="pill-btn active" data-value="3">3</button>
+          <button class="pill-btn" data-value="4">4</button>
+        </div>
+      </div>
+
+      <div class="settings-row">
+        <label class="toggle-row" for="include-new">
+          <span>Include 2024 hymns</span>
+          <div class="switch-wrap">
+            <input type="checkbox" id="include-new" role="switch">
+            <span class="switch-track"></span>
+          </div>
+        </label>
+      </div>
+
+      <div class="settings-row">
+        <label for="theme-select" class="settings-label">Theme</label>
+        <select id="theme-select">
+          <option value="">None</option>
+          <option value="Easter">Easter</option>
+          <option value="Christmas">Christmas</option>
+          <option value="Thanksgiving">Thanksgiving</option>
+          <option value="4th of July">4th of July</option>
+          <option value="mothersfathers">Mother's &amp; Father's Day</option>
+        </select>
+      </div>
+    </section>
+
+    <div id="theme-warning" class="theme-warning hidden" role="alert"></div>
+
+    <section id="hymn-cards" class="hymn-cards" aria-label="Suggested hymns">
+      <!-- Populated by js/ui.js -->
+    </section>
+
+    <button id="reshuffle-btn" class="reshuffle-btn" type="button">Reshuffle</button>
+  </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
