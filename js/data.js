@@ -18,7 +18,11 @@ export function getSacramentPool(pool) {
 }
 
 export function getGeneralPool(pool) {
-  return pool.filter(h => !h.tags.includes('sacrament'));
+  return pool.filter(h =>
+    !h.tags.includes('sacrament') &&
+    !h.tags.includes('easter') &&
+    !h.tags.includes('christmas')
+  );
 }
 
 const THEME_TAG_MAP = {
