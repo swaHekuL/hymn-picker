@@ -13,7 +13,7 @@ const THEME_DISPLAY_MAP = {
 
 export function renderCards(hymns, lockedSlots, themeChecked, hymnsCount) {
   const container = document.getElementById('hymn-cards');
-  const labels = SLOT_LABELS[hymnsCount];
+  const labels = SLOT_LABELS[hymnsCount] ?? SLOT_LABELS[3];
 
   container.innerHTML = '';
 
@@ -39,7 +39,7 @@ export function renderCards(hymns, lockedSlots, themeChecked, hymnsCount) {
 
     // Header with label and lock
     const header = document.createElement('div');
-    header.className = 'slot-header';
+    header.className = 'card-header';
     header.appendChild(label);
     header.appendChild(lockBtn);
 
@@ -59,8 +59,11 @@ export function renderCards(hymns, lockedSlots, themeChecked, hymnsCount) {
     title.className = 'hymn-title';
     title.textContent = hymn ? hymn.title : 'No hymn found';
 
-    card.appendChild(number);
-    card.appendChild(title);
+    const hymnInfo = document.createElement('div');
+    hymnInfo.className = 'hymn-info';
+    hymnInfo.appendChild(number);
+    hymnInfo.appendChild(title);
+    card.appendChild(hymnInfo);
 
     slot.appendChild(card);
 

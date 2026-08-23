@@ -53,7 +53,13 @@ function setHymnsCount(count) {
 }
 
 async function init() {
-  hymnData = await loadHymns();
+  try {
+    hymnData = await loadHymns();
+  } catch (err) {
+    document.getElementById('hymn-cards').innerHTML =
+      '<p style="padding:16px;color:#c00;">Could not load hymn data. Please check your connection and reload.</p>';
+    return;
+  }
 
   const saved = loadSettings();
   if (saved) {
