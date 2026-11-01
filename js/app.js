@@ -1,4 +1,4 @@
-import { loadHymns } from './data.js';
+import { loadHymns, getTopics } from './data.js';
 import { selectHymns } from './selector.js';
 import { renderCards, showThemeWarning, hideThemeWarning } from './ui.js';
 import { saveSettings, loadSettings } from './storage.js';
@@ -60,6 +60,17 @@ async function init() {
       '<p style="padding:16px;color:#c00;">Could not load hymn data. Please check your connection and reload.</p>';
     return;
   }
+
+  const select = document.getElementById('theme-select');
+  const group = document.createElement('optgroup');
+  group.label = 'Topics';
+  getTopics(hymnData).forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = 'topic:' + t;
+    opt.textContent = t;
+    group.appendChild(opt);
+  });
+  select.appendChild(group);
 
   const saved = loadSettings();
   if (saved) {

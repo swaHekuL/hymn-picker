@@ -1,4 +1,4 @@
-const CACHE = 'hymnpicker-v1';
+const CACHE = 'hymnpicker-v2';
 const ASSETS = [
   '/',
   '/index.html',

@@ -33,7 +33,15 @@ const THEME_TAG_MAP = {
   'mothersfathers': 'mothersfathers'
 };
 
+export function getTopics(data) {
+  return [...new Set(data.classic.flatMap(h => h.topics || []))].sort();
+}
+
 export function getThemePool(pool, theme) {
+  if (theme.startsWith('topic:')) {
+    const topic = theme.slice(6);
+    return pool.filter(h => !h.tags.includes('sacrament') && (h.topics || []).includes(topic));
+  }
   const tag = THEME_TAG_MAP[theme];
   if (!tag) return [];
   return pool.filter(h => !h.tags.includes('sacrament') && h.tags.includes(tag));

@@ -90,7 +90,7 @@ export function renderCards(hymns, lockedSlots, themeChecked, hymnsCount) {
 
 export function showThemeWarning(theme) {
   const warningEl = document.getElementById('theme-warning');
-  const displayName = THEME_DISPLAY_MAP[theme] || theme;
+  const displayName = THEME_DISPLAY_MAP[theme] || theme.replace(/^topic:/, '');
   warningEl.textContent = `Not enough ${displayName} hymns — some slots used the general pool.`;
   warningEl.classList.remove('hidden');
 }
